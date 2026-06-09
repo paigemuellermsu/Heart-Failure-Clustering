@@ -1,6 +1,3 @@
-import os
-print("WORKING DIRECTORY:", os.getcwd())
-
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
@@ -43,3 +40,17 @@ cluster_summary = df.groupby("Cluster_HC").agg(
 )
 
 print(cluster_summary)
+
+# age --> age of patient
+# anemia --> 0: false, 1: true
+# creatinine_phosphokinase --> level of the enzyme in the blood
+# diabetes --> 0: false, 1: true
+# ejection_fraction --> percentage of blood leaving the heart at each contraction
+# high_blood_pressure --> 0: false, 1: true
+# platelets --> number of platelets in the blood
+# serum_creatinine --> level of creatinine in the blood
+# serum_sodium --> level of sodium in the blood
+# sex --> 0: female, 1: male
+# smoking --> 0: false, 1: true
+# time --> follow-up time in days
+# DEATH_EVENT --> 0: false, 1: true
