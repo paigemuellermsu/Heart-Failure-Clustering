@@ -23,6 +23,7 @@ clusters = kmeans.fit_predict(X_scaled)
 df["Cluster"] = clusters
 df.head()
 
+# PCA Plot
 from sklearn.decomposition import PCA
 pca = PCA(n_components=2)
 X_2d = pca.fit_transform(X_scaled)
@@ -32,8 +33,43 @@ plt.ylabel("PCA 2")
 plt.title("K-Means Clusters")
 plt.show()
 
-cluster_summary = df.groupby("Cluster_HC").agg(
-    n=("Cluster_HC", "size"),
+# Isomap Plot
+from sklearn.manifold import Isomap
+
+iso = Isomap(n_components=2)
+X_iso = iso.fit_transform(X_scaled)
+
+plt.figure(figsize=(8,6))
+plt.scatter(
+    X_iso[:,0],
+    X_iso[:,1],
+    c=df["Cluster"],   # FIXED
+    cmap="viridis"
+)
+plt.title("K-Means Clusters (Isomap Projection)")
+plt.colorbar()
+plt.show()
+
+# t-SNE Plot
+from sklearn.manifold import TSNE
+
+tsne = TSNE(n_components=2, random_state=42)
+X_tsne = tsne.fit_transform(X_scaled)
+
+plt.figure(figsize=(8,6))
+plt.scatter(
+    X_tsne[:,0],
+    X_tsne[:,1],
+    c=df["Cluster"],   # FIXED
+    cmap="viridis"
+)
+plt.title("K-Means Clusters (t-SNE Projection)")
+plt.colorbar()
+plt.show()
+
+# Cluster Summary
+cluster_summary = df.groupby("Cluster").agg(
+    n=("Cluster", "size"),
     mean_age=("age", "mean"),
     sd_age=("age", "std"),
     pct_anaemia=("anaemia", lambda x: x.mean()*100)

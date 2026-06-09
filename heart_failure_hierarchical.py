@@ -5,7 +5,6 @@ from sklearn.cluster import AgglomerativeClustering
 from scipy.cluster.hierarchy import dendrogram, linkage
 
 from pathlib import Path
-import pandas as pd
 
 script_dir = Path(__file__).parent
 csv_path = script_dir / "heart_failure_clinical_records_dataset_real.csv"
@@ -23,6 +22,7 @@ hc = AgglomerativeClustering(n_clusters=3)
 df["Cluster_HC"] = hc.fit_predict(X_scaled)
 df.head()
 
+# Dendrogram
 Z = linkage(X_scaled, method="ward")
 plt.figure(figsize=(10,5))
 dendrogram(Z)
